@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,7 +12,7 @@
         <!--Today-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="TodayVC" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -78,13 +79,107 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o9T-UM-o2G" userLabel="Details">
                                         <rect key="frame" x="0.0" y="261.5" width="320" height="213.5"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hiL-tr-giv">
-                                                <rect key="frame" x="105" y="0.0" width="200" height="171"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="hiL-tr-giv">
+                                                <rect key="frame" x="0.0" y="28" width="320" height="143"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j0u-D6-q5e">
-                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="171"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="j0u-D6-q5e" userLabel="Upper details">
+                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8R4-x9-mdR" userLabel="padding">
+                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="64"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" id="glv-uD-q2k"/>
+                                                                </constraints>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KQB-d5-DSV" userLabel="Clouds" customClass="WeatherDetailsView" customModule="WeatherApp" customModuleProvider="target">
+                                                                <rect key="frame" x="32" y="0.0" width="64" height="64"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" secondItem="KQB-d5-DSV" secondAttribute="height" multiplier="1:1" id="Fpc-6I-zcN"/>
+                                                                </constraints>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wc5-av-Rsw" userLabel="Humidity" customClass="WeatherDetailsView" customModule="WeatherApp" customModuleProvider="target">
+                                                                <rect key="frame" x="128" y="0.0" width="64" height="64"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" secondItem="wc5-av-Rsw" secondAttribute="height" multiplier="1:1" id="yQa-8W-6z6"/>
+                                                                </constraints>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pJZ-7k-2HU" userLabel="Pressure" customClass="WeatherDetailsView" customModule="WeatherApp" customModuleProvider="target">
+                                                                <rect key="frame" x="224" y="0.0" width="64" height="64"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" secondItem="pJZ-7k-2HU" secondAttribute="height" multiplier="1:1" id="Gr6-cW-jVZ"/>
+                                                                </constraints>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GO6-XO-AbL" userLabel="padding">
+                                                                <rect key="frame" x="320" y="0.0" width="0.0" height="64"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" id="wRB-79-MyL"/>
+                                                                </constraints>
+                                                            </view>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="KQB-d5-DSV" firstAttribute="width" secondItem="j0u-D6-q5e" secondAttribute="width" multiplier="0.2" id="C06-AZ-nwG"/>
+                                                            <constraint firstItem="wc5-av-Rsw" firstAttribute="width" secondItem="j0u-D6-q5e" secondAttribute="width" multiplier="0.2" id="DZd-13-X2r"/>
+                                                            <constraint firstItem="pJZ-7k-2HU" firstAttribute="width" secondItem="j0u-D6-q5e" secondAttribute="width" multiplier="0.2" id="fix-p8-WXP"/>
+                                                        </constraints>
+                                                    </stackView>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F0u-d4-FCw">
+                                                        <rect key="frame" x="0.0" y="64" width="320" height="15"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="15" id="qpP-S3-Dns"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="uto-Xt-eT0" userLabel="Lower details">
+                                                        <rect key="frame" x="0.0" y="79" width="320" height="64"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E0F-or-tAO" userLabel="padding">
+                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="64"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" id="WCL-7z-03s"/>
+                                                                </constraints>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gz2-N0-rQh" userLabel="Wind velocity" customClass="WeatherDetailsView" customModule="WeatherApp" customModuleProvider="target">
+                                                                <rect key="frame" x="64" y="0.0" width="64" height="64"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" secondItem="Gz2-N0-rQh" secondAttribute="height" multiplier="1:1" id="XVI-8N-3do"/>
+                                                                </constraints>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qkV-8F-WJ1" userLabel="Wind direction" customClass="WeatherDetailsView" customModule="WeatherApp" customModuleProvider="target">
+                                                                <rect key="frame" x="192" y="0.0" width="64" height="64"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" secondItem="qkV-8F-WJ1" secondAttribute="height" multiplier="1:1" id="eFI-bz-kcq"/>
+                                                                </constraints>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5dE-oH-8y6" userLabel="padding">
+                                                                <rect key="frame" x="320" y="0.0" width="0.0" height="64"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" id="KW9-ff-elc"/>
+                                                                </constraints>
+                                                            </view>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="Gz2-N0-rQh" firstAttribute="width" secondItem="uto-Xt-eT0" secondAttribute="width" multiplier="0.2" id="Dgc-9F-XOR"/>
+                                                            <constraint firstItem="qkV-8F-WJ1" firstAttribute="width" secondItem="uto-Xt-eT0" secondAttribute="width" multiplier="0.2" id="Vjn-Gq-4gR"/>
+                                                        </constraints>
                                                     </stackView>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="j0u-D6-q5e" firstAttribute="width" secondItem="hiL-tr-giv" secondAttribute="width" id="5Gf-aF-uUa"/>
+                                                    <constraint firstItem="F0u-d4-FCw" firstAttribute="top" secondItem="j0u-D6-q5e" secondAttribute="bottom" id="C0L-Xs-mXX"/>
+                                                    <constraint firstItem="F0u-d4-FCw" firstAttribute="centerX" secondItem="hiL-tr-giv" secondAttribute="centerX" id="IYQ-Nb-FgQ"/>
+                                                    <constraint firstItem="uto-Xt-eT0" firstAttribute="top" secondItem="F0u-d4-FCw" secondAttribute="bottom" id="Rn9-uo-11L"/>
+                                                    <constraint firstItem="F0u-d4-FCw" firstAttribute="width" secondItem="hiL-tr-giv" secondAttribute="width" id="ip7-7t-xiY"/>
+                                                    <constraint firstItem="uto-Xt-eT0" firstAttribute="width" secondItem="hiL-tr-giv" secondAttribute="width" id="kdS-ib-frJ"/>
+                                                </constraints>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xrk-46-uE0" userLabel="padding">
                                                 <rect key="frame" x="0.0" y="171" width="320" height="42.5"/>
@@ -97,8 +192,8 @@
                                             <constraint firstItem="xrk-46-uE0" firstAttribute="height" secondItem="o9T-UM-o2G" secondAttribute="height" multiplier="0.2" id="Awz-U9-yJw"/>
                                             <constraint firstItem="xrk-46-uE0" firstAttribute="centerX" secondItem="o9T-UM-o2G" secondAttribute="centerX" id="TGY-6E-YjT"/>
                                             <constraint firstItem="xrk-46-uE0" firstAttribute="top" secondItem="hiL-tr-giv" secondAttribute="bottom" id="WSc-Jp-8JI"/>
+                                            <constraint firstItem="hiL-tr-giv" firstAttribute="width" secondItem="o9T-UM-o2G" secondAttribute="width" id="ab3-Vd-WTg"/>
                                             <constraint firstItem="xrk-46-uE0" firstAttribute="width" secondItem="o9T-UM-o2G" secondAttribute="width" id="lhf-Cr-o1M"/>
-                                            <constraint firstItem="hiL-tr-giv" firstAttribute="height" secondItem="o9T-UM-o2G" secondAttribute="height" multiplier="0.8" id="mtg-Ei-11A"/>
                                             <constraint firstItem="hiL-tr-giv" firstAttribute="centerX" secondItem="o9T-UM-o2G" secondAttribute="centerX" id="phn-MW-ukT"/>
                                         </constraints>
                                     </view>
@@ -129,6 +224,13 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Today" id="a0M-0p-3Ny"/>
+                    <connections>
+                        <outlet property="cloudDetail" destination="KQB-d5-DSV" id="hdw-0W-X5D"/>
+                        <outlet property="humidityDetail" destination="wc5-av-Rsw" id="v9R-7b-me1"/>
+                        <outlet property="pressureDetail" destination="pJZ-7k-2HU" id="vcH-rz-B6J"/>
+                        <outlet property="windDirectionDetail" destination="qkV-8F-WJ1" id="jFV-ys-TEl"/>
+                        <outlet property="windVelocityDetail" destination="Gz2-N0-rQh" id="URu-Lu-RDX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -175,6 +277,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="8sp-P4-f3o" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="uRz-y5-AO4">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>

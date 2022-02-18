@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  TodayVC.swift
 //  WeatherApp
 //
 //  Created by Lasha Kitiashvili on 2/16/22.
@@ -8,12 +8,22 @@
 import UIKit
 import CoreLocation
 
-class ViewController: UIViewController {
+class TodayVC: UIViewController {
+    @IBOutlet var cloudDetail: WeatherDetailsView!
+    @IBOutlet var humidityDetail: WeatherDetailsView!
+    @IBOutlet var pressureDetail: WeatherDetailsView!
+    @IBOutlet var windVelocityDetail: WeatherDetailsView!
+    @IBOutlet var windDirectionDetail: WeatherDetailsView!
     
     private let weatherService = WeatherService()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        cloudDetail.fillData(iconName: "raining.pdf", detailValue: "1")
+        humidityDetail.fillData(iconName: "drop.pdf", detailValue: "1")
+        pressureDetail.fillData(iconName: "celsius.pdf", detailValue: "1")
+        windVelocityDetail.fillData(iconName: "wind.pdf", detailValue: "1")
+        windDirectionDetail.fillData(iconName: "compass.pdf", detailValue: "1")
         
         LocationService.shared.getUserLocation(completion: { [weak self] location in
             guard let strongSelf = self else {
