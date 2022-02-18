@@ -19,6 +19,14 @@ class ViewController: UIViewController {
             guard let strongSelf = self else {
                 return
             }
+            LocationService.shared.getLocationName(location: location, completion: { result in
+                switch result {
+                    case .success(let location):
+                        print(location)
+                    case .failure(let error):
+                        print(error)
+                }
+            })
             strongSelf.weatherService.getFiveDayForecast(lat: location.coordinate.latitude, lon: location.coordinate.longitude) { result in
                 switch result {
                     case .success(let weather):
@@ -26,7 +34,6 @@ class ViewController: UIViewController {
                     case .failure(let error):
                         print(error)
                 }
-
             }
         })
         

@@ -30,4 +30,31 @@ class LocationService: NSObject, CLLocationManagerDelegate {
         completion?(location)
         manager.stopUpdatingLocation()
     }
+    
+    public func getLocationName(location: CLLocation, completion: @escaping (Result<String, Error>) -> ()){
+        CLGeocoder().reverseGeocodeLocation(location, completionHandler: { (placemarks, error) in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            guard let placemark = placemarks?.first else {
+                completion(.failure(LocationServiceError.noLocationName))
+                return
+            }
+            guard let city = placemark.locality, let country = placemark.country else {
+                completion(.failure(LocationServiceError.noLocationName))
+                return
+            }
+//            var subLocality = ""
+//            if let sub = placemark.subLocality {
+//                subLocality = sub + ", "
+//            }
+            completion(.success(city + ", " + country))
+        })
+    }
+}
+
+
+enum LocationServiceError: Error {
+    case noLocationName
 }
