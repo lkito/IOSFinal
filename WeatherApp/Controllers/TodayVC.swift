@@ -19,14 +19,24 @@ class TodayVC: UIViewController {
     @IBOutlet var locationLabel: UILabel!
     @IBOutlet var weatherLabel: UILabel!
     
+    @IBOutlet var errorScreen: UIView!
+    @IBOutlet var errorLabel: UILabel!
+    @IBOutlet var errorButton: UIButton!
+    
     @IBOutlet var loader: UIActivityIndicatorView!
     @IBOutlet var blur: UIVisualEffectView!
     
     private let weatherService = WeatherService()
+    
+    // Variables for feature testing
+    private let MinimumLoadingTime: Double = 0.5
+    private let ErrorChancePercent: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        errorButton.layer.cornerRadius = 5
         blur.isHidden = true
+        errorScreen.isHidden = true
         cloudDetail.setIcon(iconName: "raining.pdf")
         humidityDetail.setIcon(iconName: "drop.pdf")
         pressureDetail.setIcon(iconName: "celsius.pdf")
@@ -36,10 +46,36 @@ class TodayVC: UIViewController {
         loadTodayWeatherData()
     }
     
+    @IBAction func share() {
+        var sharedText = ""
+        if let loc = self.locationLabel.text {
+            sharedText = loc + " - "
+        }
+        sharedText += self.weatherLabel.text ?? ""
+        let shareSheetVC = UIActivityViewController(activityItems: [
+             sharedText
+        ], applicationActivities: nil)
+        present(shareSheetVC, animated: true)
+    }
+    
+    @IBAction func refreshFromError() {
+        loadTodayWeatherData()
+    }
+    
+    @IBAction func refresh() {
+        loadTodayWeatherData()
+    }
+    
+    private func displayError(errorMessages: String) {
+        blur.isHidden = true
+        errorLabel.text = errorMessages
+        errorScreen.isHidden = false
+        loader.stopAnimating()
+    }
+    
     private func visualizeWeatherDetails(weather: CurrentWeatherResponse, strongSelf: TodayVC) {
         if weather.weather.count == 0 {
-            strongSelf.blur.isHidden = true
-            strongSelf.loader.stopAnimating()
+            strongSelf.displayError(errorMessages: "Couldn't retrieve weather data from servers.")
             return
         }
         let firstWeather = weather.weather[0]
@@ -52,13 +88,19 @@ class TodayVC: UIViewController {
         
         strongSelf.weatherService.getWeatherImage(imageName: firstWeather.icon, completion: { [weak self] result in
             guard let strongSelf = self else {
+                strongSelf.displayError(errorMessages: "Application error when fetching weather image.")
                 return
             }
             DispatchQueue.main.async {
                 switch result {
                     case .success(let image):
+                        let flip = arc4random_uniform(100)
+                        if (flip < strongSelf.ErrorChancePercent){
+                            strongSelf.displayError(errorMessages: "Application error when fetching weather image.")
+                        }
                         strongSelf.weatherImage.image = image
                     case .failure(let error):
+                        strongSelf.displayError(errorMessages: "Application error when fetching weather image.")
                         print(error)
                 }
                 strongSelf.blur.isHidden = true
@@ -72,14 +114,14 @@ class TodayVC: UIViewController {
                                                     lon: location.coordinate.longitude) { [weak self] result in
             DispatchQueue.main.async {
                 guard let strongSelf = self else {
+                    strongSelf.displayError(errorMessages: "Application error when fetching weather data.")
                     return
                 }
                 switch result {
                     case .success(let weather):
                         strongSelf.visualizeWeatherDetails(weather: weather, strongSelf: strongSelf)
                     case .failure(let error):
-                        strongSelf.blur.isHidden = true
-                        strongSelf.loader.stopAnimating()
+                        strongSelf.displayError(errorMessages: "Application error when fetching weather data.")
                         print(error)
                 }
             }
@@ -87,8 +129,10 @@ class TodayVC: UIViewController {
     }
     
     private func loadTodayWeatherData() {
+        errorScreen.isHidden = true
         loader.startAnimating()
         blur.isHidden = false
+        
         LocationService.shared.getUserLocation(completion: { [weak self] location in
             guard let strongSelf = self else {
                 return
@@ -102,13 +146,15 @@ class TodayVC: UIViewController {
                         case .success(let locationName):
                             strongSelf.locationLabel.text = locationName
                         case .failure(let error):
-                            strongSelf.blur.isHidden = true
-                            strongSelf.loader.stopAnimating()
+                            strongSelf.displayError(errorMessages: "Application error when fetching location.")
                             print(error)
                     }
                 }
             })
-            strongSelf.loadWeatherDetails(location: location, strongSelf: strongSelf)
+            // Lets the user take in all the work I put in animating the loading screen
+            DispatchQueue.main.asyncAfter(deadline: .now() + strongSelf.MinimumLoadingTime) {
+                strongSelf.loadWeatherDetails(location: location, strongSelf: strongSelf)
+            }
         })
     }
 

@@ -202,15 +202,89 @@
                                         </view>
                                         <blurEffect style="systemChromeMaterialLight"/>
                                     </visualEffectView>
-                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="zEX-Zy-C9m">
-                                        <rect key="frame" x="150" y="222" width="20" height="20"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="zEX-Zy-C9m">
+                                        <rect key="frame" x="141.5" y="219" width="37" height="37"/>
                                         <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </activityIndicatorView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZJS-jT-neC" userLabel="Error view">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="475"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MYi-a2-RLO" userLabel="Padding">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="71.5"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qHG-vb-mXw" userLabel="Error content">
+                                                <rect key="frame" x="40" y="71.5" width="240" height="237.5"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Swg-0T-gIn">
+                                                        <rect key="frame" x="-51.5" y="0.0" width="343" height="237.5"/>
+                                                        <subviews>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="data_load_error" translatesAutoresizingMaskIntoConstraints="NO" id="1cS-OH-W2G">
+                                                                <rect key="frame" x="112" y="0.0" width="119" height="118.5"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" secondItem="1cS-OH-W2G" secondAttribute="height" multiplier="1:1" id="aDz-q5-MSy"/>
+                                                                </constraints>
+                                                            </imageView>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZMp-Qa-CFW">
+                                                                <rect key="frame" x="51.5" y="133.5" width="240" height="20.5"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="clX-g4-MYL">
+                                                                <rect key="frame" x="123.5" y="168.5" width="96" height="30"/>
+                                                                <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                                                <state key="normal" title="Reload">
+                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="refreshFromError" destination="BYZ-38-t0r" eventType="touchUpInside" id="QqX-NM-YYQ"/>
+                                                                </connections>
+                                                            </button>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tD9-qP-Ea6" userLabel="Padding">
+                                                                <rect key="frame" x="51.5" y="213.5" width="240" height="24"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            </view>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="clX-g4-MYL" firstAttribute="centerX" secondItem="Swg-0T-gIn" secondAttribute="centerX" id="9Zu-UZ-oRb"/>
+                                                            <constraint firstItem="ZMp-Qa-CFW" firstAttribute="centerX" secondItem="Swg-0T-gIn" secondAttribute="centerX" id="J9q-gW-3L0"/>
+                                                            <constraint firstItem="ZMp-Qa-CFW" firstAttribute="width" secondItem="Swg-0T-gIn" secondAttribute="width" multiplier="0.7" id="V3x-al-xVV"/>
+                                                            <constraint firstItem="tD9-qP-Ea6" firstAttribute="centerX" secondItem="Swg-0T-gIn" secondAttribute="centerX" id="V61-z5-zXy"/>
+                                                            <constraint firstItem="1cS-OH-W2G" firstAttribute="centerX" secondItem="Swg-0T-gIn" secondAttribute="centerX" id="YxV-So-sb0"/>
+                                                            <constraint firstItem="1cS-OH-W2G" firstAttribute="height" secondItem="Swg-0T-gIn" secondAttribute="height" multiplier="0.5" id="dpt-pT-JUw"/>
+                                                            <constraint firstItem="tD9-qP-Ea6" firstAttribute="height" secondItem="Swg-0T-gIn" secondAttribute="height" multiplier="0.1" id="mOZ-d2-jS5"/>
+                                                        </constraints>
+                                                    </stackView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="Swg-0T-gIn" firstAttribute="centerY" secondItem="qHG-vb-mXw" secondAttribute="centerY" id="9hq-CK-xKR"/>
+                                                    <constraint firstItem="Swg-0T-gIn" firstAttribute="centerX" secondItem="qHG-vb-mXw" secondAttribute="centerX" id="Hf9-7o-Koq"/>
+                                                    <constraint firstItem="clX-g4-MYL" firstAttribute="width" secondItem="qHG-vb-mXw" secondAttribute="width" multiplier="0.4" id="UjU-HQ-Imd"/>
+                                                    <constraint firstItem="ZMp-Qa-CFW" firstAttribute="width" secondItem="qHG-vb-mXw" secondAttribute="width" id="jOh-Wz-gFW"/>
+                                                    <constraint firstItem="Swg-0T-gIn" firstAttribute="height" secondItem="qHG-vb-mXw" secondAttribute="height" id="saY-Qb-MA2"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="qHG-vb-mXw" firstAttribute="width" secondItem="ZJS-jT-neC" secondAttribute="width" multiplier="0.75" id="AF2-y6-zqL"/>
+                                            <constraint firstItem="MYi-a2-RLO" firstAttribute="centerX" secondItem="ZJS-jT-neC" secondAttribute="centerX" id="DZz-5R-Ldp"/>
+                                            <constraint firstItem="MYi-a2-RLO" firstAttribute="height" secondItem="ZJS-jT-neC" secondAttribute="height" multiplier="0.15" id="Hve-EP-vMh"/>
+                                            <constraint firstItem="qHG-vb-mXw" firstAttribute="top" secondItem="MYi-a2-RLO" secondAttribute="bottom" id="IE0-m6-KRW"/>
+                                            <constraint firstItem="qHG-vb-mXw" firstAttribute="centerX" secondItem="ZJS-jT-neC" secondAttribute="centerX" id="TpT-AD-Gcm"/>
+                                            <constraint firstItem="MYi-a2-RLO" firstAttribute="width" secondItem="ZJS-jT-neC" secondAttribute="width" id="U2S-Eu-KrN"/>
+                                            <constraint firstItem="qHG-vb-mXw" firstAttribute="height" secondItem="ZJS-jT-neC" secondAttribute="height" multiplier="0.5" id="bvy-lg-Poc"/>
+                                            <constraint firstItem="MYi-a2-RLO" firstAttribute="top" secondItem="ZJS-jT-neC" secondAttribute="top" id="iMG-d9-ZSD"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="oyr-ed-KFo" firstAttribute="top" secondItem="1aV-tX-6iW" secondAttribute="top" id="0eW-1l-tce"/>
+                                    <constraint firstItem="ZJS-jT-neC" firstAttribute="centerY" secondItem="1aV-tX-6iW" secondAttribute="centerY" id="2Kh-X7-PPf"/>
+                                    <constraint firstItem="ZJS-jT-neC" firstAttribute="height" secondItem="1aV-tX-6iW" secondAttribute="height" id="6Dj-4P-GNj"/>
+                                    <constraint firstItem="ZJS-jT-neC" firstAttribute="centerX" secondItem="1aV-tX-6iW" secondAttribute="centerX" id="AbR-ce-MQw"/>
                                     <constraint firstItem="W3R-KC-xT4" firstAttribute="width" secondItem="1aV-tX-6iW" secondAttribute="width" multiplier="0.5" id="BHj-xb-dXH"/>
                                     <constraint firstItem="W3R-KC-xT4" firstAttribute="centerX" secondItem="1aV-tX-6iW" secondAttribute="centerX" id="EwQ-0x-3Ss"/>
                                     <constraint firstItem="Jmm-rc-rdF" firstAttribute="width" secondItem="1aV-tX-6iW" secondAttribute="width" id="IVR-nf-L0N"/>
@@ -225,6 +299,7 @@
                                     <constraint firstItem="W3R-KC-xT4" firstAttribute="centerY" secondItem="1aV-tX-6iW" secondAttribute="centerY" constant="-5" id="pou-Bx-Ovo"/>
                                     <constraint firstItem="oyr-ed-KFo" firstAttribute="centerX" secondItem="1aV-tX-6iW" secondAttribute="centerX" id="wGE-4Y-DC0"/>
                                     <constraint firstItem="Jmm-rc-rdF" firstAttribute="centerX" secondItem="1aV-tX-6iW" secondAttribute="centerX" id="wWB-pG-8Xo"/>
+                                    <constraint firstItem="ZJS-jT-neC" firstAttribute="width" secondItem="1aV-tX-6iW" secondAttribute="width" id="zus-bE-bqd"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -235,12 +310,28 @@
                             <constraint firstItem="1aV-tX-6iW" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="JV2-dJ-IhP"/>
                             <constraint firstItem="1aV-tX-6iW" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" id="O8d-Rr-yHk"/>
                             <constraint firstItem="1aV-tX-6iW" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" id="RWU-CX-C5c"/>
+                            <constraint firstItem="zEX-Zy-C9m" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="aJ4-eG-Awf"/>
+                            <constraint firstItem="zEX-Zy-C9m" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="xZw-ad-nfc"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Today" id="a0M-0p-3Ny"/>
+                    <navigationItem key="navigationItem" title="Today" id="a0M-0p-3Ny">
+                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="Z8z-tq-GpJ">
+                            <connections>
+                                <action selector="refresh" destination="BYZ-38-t0r" id="p6V-cG-0BM"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="tpP-HY-Qr7">
+                            <connections>
+                                <action selector="share" destination="BYZ-38-t0r" id="lHa-0G-OQ4"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="blur" destination="Jmm-rc-rdF" id="jmW-BW-EmD"/>
                         <outlet property="cloudDetail" destination="KQB-d5-DSV" id="hdw-0W-X5D"/>
+                        <outlet property="errorButton" destination="clX-g4-MYL" id="A3g-Bn-8dS"/>
+                        <outlet property="errorLabel" destination="ZMp-Qa-CFW" id="pal-eO-ZBY"/>
+                        <outlet property="errorScreen" destination="ZJS-jT-neC" id="gYN-Le-yMN"/>
                         <outlet property="humidityDetail" destination="wc5-av-Rsw" id="v9R-7b-me1"/>
                         <outlet property="loader" destination="zEX-Zy-C9m" id="eid-Ki-8Yw"/>
                         <outlet property="locationLabel" destination="vZ1-J7-OvN" id="obG-LK-CSB"/>
@@ -330,6 +421,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="data_load_error" width="45" height="45"/>
         <image name="tab_forecast" width="25" height="25"/>
         <image name="tab_today" width="30" height="29"/>
         <systemColor name="separatorColor">
@@ -340,6 +432,9 @@
         </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
