@@ -30,10 +30,11 @@ class TodayVC: UIViewController {
     
     // Variables for feature testing
     private let MinimumLoadingTime: Double = 0.5
-    private let ErrorChancePercent: Int = 0
+    private let ErrorChancePercent: Int = 50
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
         errorButton.layer.cornerRadius = 5
         blur.isHidden = true
         errorScreen.isHidden = true

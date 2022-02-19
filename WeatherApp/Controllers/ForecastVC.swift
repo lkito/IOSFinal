@@ -27,7 +27,7 @@ class ForecastVC: UIViewController {
     
     // Variables for feature testing
     private let MinimumLoadingTime: Double = 0.5
-    private let ErrorChancePercent: Int = 0
+    private let ErrorChancePercent: Int = 50
     
     override func viewDidLoad() {
         super.viewDidLoad()

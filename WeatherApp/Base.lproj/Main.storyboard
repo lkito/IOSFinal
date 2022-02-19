@@ -24,11 +24,11 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="214"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3cK-kz-4Qw" userLabel="padding">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="53.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="l6D-4l-w0F">
-                                                <rect key="frame" x="119" y="53.5" width="82" height="149.5"/>
+                                                <rect key="frame" x="119" y="43" width="82" height="149.5"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0Zt-zH-4L9">
                                                         <rect key="frame" x="0.0" y="0.0" width="82" height="82"/>
@@ -64,7 +64,7 @@
                                             <constraint firstItem="3cK-kz-4Qw" firstAttribute="centerX" secondItem="oyr-ed-KFo" secondAttribute="centerX" id="Mpw-6V-fVf"/>
                                             <constraint firstItem="3cK-kz-4Qw" firstAttribute="width" secondItem="oyr-ed-KFo" secondAttribute="width" id="ONz-ql-Shk"/>
                                             <constraint firstItem="l6D-4l-w0F" firstAttribute="centerX" secondItem="oyr-ed-KFo" secondAttribute="centerX" id="hf0-dZ-OV1"/>
-                                            <constraint firstItem="3cK-kz-4Qw" firstAttribute="height" secondItem="oyr-ed-KFo" secondAttribute="height" multiplier="0.25" id="omy-Of-MW3"/>
+                                            <constraint firstItem="3cK-kz-4Qw" firstAttribute="height" secondItem="oyr-ed-KFo" secondAttribute="height" multiplier="0.2" id="omy-Of-MW3"/>
                                             <constraint firstItem="3cK-kz-4Qw" firstAttribute="top" secondItem="oyr-ed-KFo" secondAttribute="top" id="tzt-NV-4Ld"/>
                                         </constraints>
                                     </view>
@@ -79,7 +79,7 @@
                                         <rect key="frame" x="0.0" y="261.5" width="320" height="213.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="hiL-tr-giv">
-                                                <rect key="frame" x="0.0" y="-79" width="320" height="250"/>
+                                                <rect key="frame" x="0.0" y="-68.5" width="320" height="250"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="j0u-D6-q5e" userLabel="Upper details">
                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="136"/>
@@ -179,14 +179,14 @@
                                                 </constraints>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xrk-46-uE0" userLabel="padding">
-                                                <rect key="frame" x="0.0" y="171" width="320" height="42.5"/>
+                                                <rect key="frame" x="0.0" y="181.5" width="320" height="32"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="xrk-46-uE0" secondAttribute="bottom" id="3Lg-IS-PGG"/>
-                                            <constraint firstItem="xrk-46-uE0" firstAttribute="height" secondItem="o9T-UM-o2G" secondAttribute="height" multiplier="0.2" id="Awz-U9-yJw"/>
+                                            <constraint firstItem="xrk-46-uE0" firstAttribute="height" secondItem="o9T-UM-o2G" secondAttribute="height" multiplier="0.15" id="Awz-U9-yJw"/>
                                             <constraint firstItem="xrk-46-uE0" firstAttribute="centerX" secondItem="o9T-UM-o2G" secondAttribute="centerX" id="TGY-6E-YjT"/>
                                             <constraint firstItem="xrk-46-uE0" firstAttribute="top" secondItem="hiL-tr-giv" secondAttribute="bottom" id="WSc-Jp-8JI"/>
                                             <constraint firstItem="hiL-tr-giv" firstAttribute="width" secondItem="o9T-UM-o2G" secondAttribute="width" id="ab3-Vd-WTg"/>
