@@ -13,6 +13,13 @@ class ForecastVC: UIViewController {
     
     @IBOutlet var tableView: UITableView!
     
+    @IBOutlet var loader: UIActivityIndicatorView!
+    @IBOutlet var blur: UIVisualEffectView!
+    
+    @IBOutlet var errorScreen: UIView!
+    @IBOutlet var errorLabel: UILabel!
+    @IBOutlet var errorButton: UIButton!
+    
     private var forecastData: [(day: Date, weatherData: [FiveDayForecastList])] = []
     
     
@@ -25,20 +32,40 @@ class ForecastVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        blur.isHidden = true
+        
+        errorScreen.isHidden = true
+        errorButton.layer.cornerRadius = 5
+        
+        tableView.separatorStyle = .singleLine
+        tableView.separatorInset = UIEdgeInsets.init(top:0, left: tableView.bounds.width * 0.3, bottom:0, right:0);
+        tableView.separatorColor = .systemGray4
+        
         tableView.delegate = self
         tableView.dataSource = self
         
         tableView.register(UINib(nibName: "ForecastCell", bundle: nil), forCellReuseIdentifier: "ForecastCell")
+        tableView.register(UINib(nibName: "ForecastHeader", bundle: nil), forHeaderFooterViewReuseIdentifier: "ForecastHeader")
         
         fetchForecastData()
     }
     
     
     private func displayError(errorMessages: String) {
-//        blur.isHidden = true
-//        errorLabel.text = errorMessages
-//        errorScreen.isHidden = false
-//        loader.stopAnimating()
+        DispatchQueue.main.async {
+            self.blur.isHidden = true
+            self.errorLabel.text = errorMessages
+            self.errorScreen.isHidden = false
+            self.loader.stopAnimating()
+        }
+    }
+    
+    @IBAction func refreshFromError() {
+        fetchForecastData()
+    }
+    
+    @IBAction func refresh() {
+        fetchForecastData()
     }
     
     private func storeForecastDetails(forecast: FiveDayForecastResponse, strongSelf: ForecastVC) {
@@ -51,6 +78,7 @@ class ForecastVC: UIViewController {
         
         var currentDay: Date = Date()
         var currentDayWeathers: [FiveDayForecastList] = []
+        strongSelf.forecastData = []
         for weather in forecast.list {
             guard let day = dateFormatter.date(from: weather.dtTxt)?.stripTime() else {
                 continue
@@ -64,9 +92,11 @@ class ForecastVC: UIViewController {
             }
             currentDayWeathers.append(weather)
         }
-        
         DispatchQueue.main.async {
             strongSelf.tableView.reloadData()
+            strongSelf.loader.stopAnimating()
+            strongSelf.blur.isHidden = true
+            strongSelf.errorScreen.isHidden = true
         }
     }
     
@@ -75,6 +105,11 @@ class ForecastVC: UIViewController {
                                                      lon: location.coordinate.longitude) { result in
             switch result {
                 case .success(let forecast):
+                    let flip = arc4random_uniform(100)
+                    if (flip < strongSelf.ErrorChancePercent){
+                        strongSelf.displayError(errorMessages: "Application error when fetching forecast data.")
+                        return
+                    }
                     strongSelf.storeForecastDetails(forecast: forecast, strongSelf: strongSelf)
                 case .failure(let error):
                     strongSelf.displayError(errorMessages: "Application error when fetching forecast data.")
@@ -84,6 +119,9 @@ class ForecastVC: UIViewController {
     }
     
     private func fetchForecastData() {
+        loader.startAnimating()
+        blur.isHidden = false
+        errorScreen.isHidden = true
         LocationService.shared.getUserLocation(completion: { [weak self] location in
             guard let strongSelf = self else {
                 return
@@ -139,6 +177,18 @@ extension ForecastVC: UITableViewDelegate, UITableViewDataSource {
             })
         }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "ForecastHeader")
+        if let forecastHeader = header as? ForecastHeader {
+            forecastHeader.configure(dateText: self.forecastData[section].day.dayOfWeek() ?? "")
+        }
+        return header
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

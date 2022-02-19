@@ -67,10 +67,13 @@ class TodayVC: UIViewController {
     }
     
     private func displayError(errorMessages: String) {
-        blur.isHidden = true
-        errorLabel.text = errorMessages
-        errorScreen.isHidden = false
-        loader.stopAnimating()
+        DispatchQueue.main.async {
+            self.blur.isHidden = true
+            self.errorLabel.text = errorMessages
+            self.errorScreen.isHidden = false
+            self.loader.stopAnimating()
+            self.navigationItem.rightBarButtonItem?.isEnabled = false
+        }
     }
     
     private func visualizeWeatherDetails(weather: CurrentWeatherResponse, strongSelf: TodayVC) {
@@ -92,6 +95,7 @@ class TodayVC: UIViewController {
                         let flip = arc4random_uniform(100)
                         if (flip < strongSelf.ErrorChancePercent){
                             strongSelf.displayError(errorMessages: "Application error when fetching weather image.")
+                            return
                         }
                         strongSelf.weatherImage.image = image
                     case .failure(let error):
@@ -100,6 +104,7 @@ class TodayVC: UIViewController {
                 }
                 strongSelf.blur.isHidden = true
                 strongSelf.loader.stopAnimating()
+                self.navigationItem.rightBarButtonItem?.isEnabled = true
             }
         })
     }
