@@ -32,10 +32,13 @@ class WeatherDetailsView: UIView {
         
         addSubview(container)
     }
-
-    func fillData(iconName: String, detailValue: String) {
+    
+    func setDetail(detailValue: String) {
+        self.detailLabel.text = detailValue
+    }
+    
+    func setIcon(iconName: String) {
         self.detailImageView.image = UIImage(named: iconName)
         self.detailImageView.tintColor = UIColor.systemYellow
-        self.detailLabel.text = detailValue
     }
 }

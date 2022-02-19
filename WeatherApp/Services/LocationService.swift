@@ -52,6 +52,14 @@ class LocationService: NSObject, CLLocationManagerDelegate {
             completion(.success(city + ", " + country))
         })
     }
+    
+    public func degreesToDirection(degrees: Double) -> String {
+        if degrees < 0 { return "" }
+
+        let directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"]
+        let index = Int((degrees + 22.5) / 45.0) & 7
+        return directions[index]
+    }
 }
 
 
