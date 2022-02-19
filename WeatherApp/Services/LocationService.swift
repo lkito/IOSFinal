@@ -24,11 +24,11 @@ class LocationService: NSObject, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        manager.stopUpdatingLocation()
         guard let location = locations.first else {
             return
         }
         completion?(location)
-        manager.stopUpdatingLocation()
     }
     
     public func getLocationName(location: CLLocation, completion: @escaping (Result<String, Error>) -> ()){

@@ -368,14 +368,29 @@
         <!--Forecast-->
         <scene sceneID="3tg-Wp-ugi">
             <objects>
-                <viewController id="YRK-HY-AjA" sceneMemberID="viewController">
+                <viewController id="YRK-HY-AjA" customClass="ForecastVC" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="v9Q-LE-Xza">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DeZ-ip-tAA">
+                                <rect key="frame" x="0.0" y="44" width="320" height="475"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Vmh-Ix-XvZ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Vmh-Ix-XvZ" firstAttribute="bottom" secondItem="DeZ-ip-tAA" secondAttribute="bottom" id="PCj-fR-wWV"/>
+                            <constraint firstItem="DeZ-ip-tAA" firstAttribute="top" secondItem="Vmh-Ix-XvZ" secondAttribute="top" id="iS4-dP-rwc"/>
+                            <constraint firstItem="Vmh-Ix-XvZ" firstAttribute="trailing" secondItem="DeZ-ip-tAA" secondAttribute="trailing" id="ol4-Vx-PP1"/>
+                            <constraint firstItem="DeZ-ip-tAA" firstAttribute="leading" secondItem="Vmh-Ix-XvZ" secondAttribute="leading" id="wvW-y0-eaJ"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Forecast" id="yGn-mb-zQF"/>
+                    <connections>
+                        <outlet property="tableView" destination="DeZ-ip-tAA" id="y0g-2b-ysc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yKN-Y8-Y7l" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

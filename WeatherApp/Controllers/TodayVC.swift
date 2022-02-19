@@ -85,12 +85,7 @@ class TodayVC: UIViewController {
         strongSelf.pressureDetail.setDetail(detailValue: String(weather.main.pressure) + " hPa")
         strongSelf.windVelocityDetail.setDetail(detailValue: String(weather.wind.speed) + " km/h")
         strongSelf.windDirectionDetail.setDetail(detailValue: LocationService.shared.degreesToDirection(degrees: weather.wind.deg))
-        
-        strongSelf.weatherService.getWeatherImage(imageName: firstWeather.icon, completion: { [weak self] result in
-            guard let strongSelf = self else {
-                strongSelf.displayError(errorMessages: "Application error when fetching weather image.")
-                return
-            }
+        strongSelf.weatherService.getWeatherImage(imageName: firstWeather.icon, completion: { result in
             DispatchQueue.main.async {
                 switch result {
                     case .success(let image):
@@ -111,12 +106,8 @@ class TodayVC: UIViewController {
 
     private func loadWeatherDetails(location: CLLocation, strongSelf: TodayVC) {
         strongSelf.weatherService.getCurrentWeather(lat: location.coordinate.latitude,
-                                                    lon: location.coordinate.longitude) { [weak self] result in
+                                                    lon: location.coordinate.longitude) { result in
             DispatchQueue.main.async {
-                guard let strongSelf = self else {
-                    strongSelf.displayError(errorMessages: "Application error when fetching weather data.")
-                    return
-                }
                 switch result {
                     case .success(let weather):
                         strongSelf.visualizeWeatherDetails(weather: weather, strongSelf: strongSelf)
@@ -137,11 +128,8 @@ class TodayVC: UIViewController {
             guard let strongSelf = self else {
                 return
             }
-            LocationService.shared.getLocationName(location: location, completion: { [weak self] result in
+            LocationService.shared.getLocationName(location: location, completion: { result in
                 DispatchQueue.main.async {
-                    guard let strongSelf = self else {
-                        return
-                    }
                     switch result {
                         case .success(let locationName):
                             strongSelf.locationLabel.text = locationName
